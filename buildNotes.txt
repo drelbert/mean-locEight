@@ -1,0 +1,99 @@
+//Material UI
+    is 
+        ng package 
+            with ng components
+
+                such as 
+                navigation 
+                layout
+                form controls
+
+    
+    be sure to
+        unlock the component in 'app module'
+        and in the appropriate people or projects module
+        prior to use 
+
+
+//SCSS notes 
+    app.component.SCSS  
+        has 
+            main
+    
+    app.people.component.SCSS 
+        has 
+            nada for now
+    
+    app.people-list.component.SCSS
+    app.people-add.component.SCSS
+        has 
+            host 
+
+
+//Structural Directives 
+    dynamically loop to create x panels or what ever 
+    instructions on element
+    example 
+        ngModel 
+            applies to a single element
+
+        *ngfor 
+            structually change the rendered html code 
+            helper tool to repeat element as often as required 
+
+//Creating people list with property and event binding 
+    first
+    in the template
+        build up the input field 
+            using
+            mat input 
+
+            add mgModel for two way binding 
+        
+    in the component.ts file 
+        use two-way binding 
+            by adding a property to the 
+            class
+    
+    second
+    in the component.ts 
+        add a const
+        example 
+            const people ={name: this.enteredName, role: this.enteredRole};
+
+            where 
+                enteredName
+                and
+                enteredRole
+                    are properties on the class
+    
+    third 
+        get the data from the form to another component
+
+            can emit events 
+            and 
+            send data into a component
+            add it to say an array 
+            then later 
+            send it to a component
+
+        for details see lesson 23
+
+
+//Model creation
+    file 
+        people.model added 
+            using interface which is like a class and defines how an object can be instanciated
+            so 
+                Person[]
+            and 
+            exported
+
+        imported   
+            Person[]
+                to 
+                    app.component   
+                    people-list.component
+                    people-add.component 
+                    
+    

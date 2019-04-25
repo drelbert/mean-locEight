@@ -1,0 +1,10 @@
+
+<mat-accordion *ngIf="people.length > 0">
+  <mat-expansion-panel *ngFor="let person of people">
+    <mat-expansion-panel-header>
+      {{ person.name }}
+    </mat-expansion-panel-header>
+    <p>{{ person.role }}</p>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="mat-body=1" *ngIf="people.length <= 0">Nothing to Display</p>
