@@ -5,6 +5,10 @@
       {{ person.name }}
     </mat-expansion-panel-header>
     <p>{{ person.role }}</p>
+     <mat-action-row>
+      <button mat-button color="accent">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+    </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
 <p class="mat-body=1" *ngIf="people.length <= 0">Nothing to Display</p>

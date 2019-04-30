@@ -96,4 +96,70 @@
                     people-list.component
                     people-add.component 
                     
+//Adding NodeJS 
+
+    RESTful API 
+        a server side app or service 
+
+        is
+        stateless backend 
+        
+        does 
+        exposes a few URLs or paths 
+
+            for instance 
+                RESTFul Server API
+                /users
+                /projects
+                /people 
+
+                    has 
+                        get
+                        post 
+                        get
+                        delete 
+
+                     can 
+                        req (AJAX) from 
+                            the Angualar client 
+                        
+                        res from API 
+                            to use in client side 
+
+                    JSON
+                        is how we communicate 
+                            from server to 
+                                client 
+
+        this sets things up to allow for servicing multiple clients
+            like
+            mobile 
+            client code 
+
+
+    starting server 
+        in terminal 
+           npm run start:server 
+
+
+//MongoDb 
+    Atlas 
+        Project = LocEight
+        
+        new cluster =
+
+        admin 
+            locEightAdmin
+            
+
     
+    The Driver 
+        Mongoose 
+            builds up on mongodb driver 
+
+            uses 
+                schemas 
+                    for data structure 
+
+            
+        

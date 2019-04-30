@@ -9,6 +9,7 @@
           ngModel
           required
           minlength="5"
+          placeholder="Add First and Last Name"
           #name="ngModel">
          <mat-error *ngIf="name.invalid">Please Add Name</mat-error>
         </mat-form-field>
@@ -20,6 +21,7 @@
           ngModel
           required
           minlength="3"
+          placeholder="Add Role"
           #role="ngModel"></textarea>
          <mat-error *ngIf="role.invalid">Please Add a Role</mat-error>
         </mat-form-field>

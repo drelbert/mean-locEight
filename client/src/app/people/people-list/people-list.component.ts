@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Person } from './person.model';
@@ -9,7 +9,7 @@ import { PeopleService } from './people.service';
   templateUrl: './people-list.component.html',
   styleUrls: ['./people-list.component.scss']
 })
-export class PeopleListComponent implements OnInit {
+export class PeopleListComponent implements OnInit, OnDestroy {
 
   /*
     { name: 'El Jeffe', role: 'Manager of Managers'},
@@ -27,11 +27,15 @@ export class PeopleListComponent implements OnInit {
   constructor(public peopleService: PeopleService) {}
 
   ngOnInit() {
-    this.people = this.peopleService.getPeople();
+    this.peopleService.getPeople();
     this.peopleSub = this.peopleService.getPeopleUpdateListener()
       .subscribe((people: Person[]) => {
         this.people = people;
       });
+  }
+
+  ngOnDestroy() {
+    this.peopleSub.unsubscribe();
   }
 
 }
