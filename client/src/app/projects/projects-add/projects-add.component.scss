@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+
+mat-card{
+  background-color: #607d8b;
+}
+
+mat-card-header{
+  background-color: #34515e;
+}
+
+mat-card-title{
+  color: #eceff1;
+}
+
+button{
+  background-color: #616161;
+  color: #eceff1;
+}
+
+mat-form-field,
+textarea {
+  width: 97%;
+  margin: .4rem;
+}
+
+mat-error{
+  color: whitesmoke;
+}

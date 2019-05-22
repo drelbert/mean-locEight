@@ -1,14 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+
 import { Person } from './person.model';
 import { PeopleService } from './people.service';
+
 
 @Component({
   selector: 'app-people-list',
   templateUrl: './people-list.component.html',
   styleUrls: ['./people-list.component.scss']
 })
+
+
 export class PeopleListComponent implements OnInit, OnDestroy {
 
   /*
@@ -19,6 +23,7 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   ];
   */
   people: Person[] = [];
+  isLoading = false;
   private peopleSub: Subscription;
 
   // Adding a constructor for dependency injection
@@ -27,11 +32,17 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   constructor(public peopleService: PeopleService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.peopleService.getPeople();
     this.peopleSub = this.peopleService.getPeopleUpdateListener()
       .subscribe((people: Person[]) => {
+        this.isLoading = false;
         this.people = people;
       });
+  }
+
+  onDelete(personId: string) {
+      this.peopleService.deletePerson(personId);
   }
 
   ngOnDestroy() {

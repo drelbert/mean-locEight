@@ -1,14 +1,18 @@
 
 <mat-card>
-  <form (submit)="onAddPerson(peopleForm)" #peopleForm="ngForm">
+  <mat-card-header>
+    <mat-card-title>
+      <p>Add A Person</p>
+    </mat-card-title>
+  </mat-card-header>
+  <form (submit)="onSavePerson(peopleForm)" #peopleForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
           <input
           matInput
           type="text"
           name="name"
-          ngModel
+          [ngModel]="person?.name"
           required
-          minlength="5"
           placeholder="Add First and Last Name"
           #name="ngModel">
          <mat-error *ngIf="name.invalid">Please Add Name</mat-error>
@@ -18,9 +22,8 @@
           matInput
           type="text"
           name="role"
-          ngModel
+          [ngModel]="person?.role"
           required
-          minlength="3"
           placeholder="Add Role"
           #role="ngModel"></textarea>
          <mat-error *ngIf="role.invalid">Please Add a Role</mat-error>
@@ -28,8 +31,10 @@
         <button
         mat-raised-button
         color="primary"
-        type="submit">Add Person</button>
+        type="submit">Save</button>
    </form>
  </mat-card>
+
+
 
 

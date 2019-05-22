@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <p>Add A Project</p>
+    </mat-card-title>
+  </mat-card-header>
+    <form (submit)="onAddProject(projectForm)" #projectForm="ngForm">
+      <mat-card-content>
+          <mat-form-field>
+            <input
+            matInput
+            type="text"
+            name="title"
+            [ngModel]="project?.title"
+            required
+            placeholder="Project Title"
+            #title="ngModel">
+            <mat-error *ngIf="title.invalid">Please Enter a Title</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input
+            matInput
+            type="text"
+            name="lead"
+            [ngModel]="project?.lead"
+            required
+            placeholder="Project Lead"
+            #lead="ngModel">
+            <mat-error *ngIf="lead.invalid">Please Add a Project Lead</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input
+              matInput
+              type="date"
+              name="dateDue"
+              [ngModel]="project?.dateDue"
+              required
+              placeholder="Due Date"
+              #dateDue="ngModel">
+              <mat-error *ngIf="dateDue.invalid">Please Add Due Date</mat-error>
+            </mat-form-field>
+      </mat-card-content>
+      <button
+        mat-raised-button
+        type="submit">Save
+      </button>
+    </form>
+</mat-card>
+
+
+

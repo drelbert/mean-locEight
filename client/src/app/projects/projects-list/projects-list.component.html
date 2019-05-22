@@ -1,0 +1,21 @@
+<mat-card-header>
+    <mat-card-title>
+      <p>Current Projects</p>
+    </mat-card-title>
+  </mat-card-header>
+<mat-accordion multi="true" *ngIf="projects.length > 0">
+  <mat-expansion-panel *ngFor="let project of projects">
+    <mat-expansion-panel-header>
+      {{ project.title }}
+    </mat-expansion-panel-header>
+       <p>{{ project.dateDue }}</p>
+       <p>{{ project.lead }}</p>
+    <mat-action-row>
+      <a mat-button [routerLink]="['/editProject', project.id]">EDIT</a>
+      <button mat-button (click)="onDelete(project.id)">DELETE</button>
+    </mat-action-row>
+ </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="projects.length <= 0">No Projects Yet!</p>
+
+<app-projects-add></app-projects-add>

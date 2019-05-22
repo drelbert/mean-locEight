@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material';
 import { MatFormField } from '@angular/material';
 import { MatInputModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { MatExpansionModule } from '@angular/material';
-
-
+import { RouterModule } from '@angular/router';
 
 import { PeopleComponent } from './people.component';
 import { PeopleAddComponent } from './people-add/people-add.component';
@@ -28,7 +28,9 @@ import { PeopleListComponent } from './people-list/people-list.component';
     MatInputModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    RouterModule
   ]
 })
 export class PeopleModule { }

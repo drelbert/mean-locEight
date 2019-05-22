@@ -1,0 +1,195 @@
+//Material UI
+    is
+        ng package
+            with ng components
+
+                such as
+                navigation
+                layout
+                form controls
+
+
+    be sure to
+        unlock the component in 'app module'
+        and in the appropriate people or projects module
+        prior to use
+
+
+//Adding module and components
+
+    ng g module projects
+    in projects module folder
+
+      ng g c projects-add
+
+      ng g c projects-list
+
+
+
+
+
+//SCSS notes
+    app.component.SCSS
+        has
+            main
+
+    app.people.component.SCSS
+        has
+            nada for now
+
+    app.people-list.component.SCSS
+    app.people-add.component.SCSS
+        has
+            host
+
+
+//Structural Directives
+    dynamically loop to create x panels or what ever
+    instructions on element
+    example
+        ngModel
+            applies to a single element
+
+        *ngfor
+            structually change the rendered html code
+            helper tool to repeat element as often as required
+
+//Creating people list with property and event binding
+    first
+    in the template
+        build up the input field
+            using
+            mat input
+
+            add mgModel for two way binding
+
+    in the component.ts file
+        use two-way binding
+            by adding a property to the
+            class
+
+    second
+    in the component.ts
+        add a const
+        example
+            const people ={name: this.enteredName, role: this.enteredRole};
+
+            where
+                enteredName
+                and
+                enteredRole
+                    are properties on the class
+
+    third
+        get the data from the form to another component
+
+            can emit events
+            and
+            send data into a component
+            add it to say an array
+            then later
+            send it to a component
+
+        for details see lesson 23
+
+
+//Model creation
+    file
+        people.model added
+            using interface which is like a class and defines how an object can be instanciated
+            so
+                Person[]
+            and
+            exported
+
+        imported
+            Person[]
+                to
+                    app.component
+                    people-list.component
+                    people-add.component
+
+//Adding NodeJS
+
+    RESTful API
+        a server side app or service
+
+        is
+        stateless backend
+
+        does
+        expose a few URLs or paths
+
+            for instance
+                RESTFul Server API
+                /users
+                /projects
+                /people
+
+                    has
+                        get
+                        post
+                        get
+                        delete
+
+                     can
+                        req (AJAX) from
+                            the Angualar client
+
+                        res from API
+                            to use in client side
+
+                    JSON
+                        is how we communicate
+                            from server to
+                                client
+
+        this sets things up to allow for servicing multiple clients
+            like
+            mobile
+            or
+            client code
+
+
+//Starting server (3000)
+        in terminal
+           npm run start:server
+
+
+//MongoDb
+    Atlas
+        Project = LocEight
+
+        new cluster =
+
+        admin
+            locEightAdmin
+
+
+
+    The Driver
+        Mongoose
+            builds up on mongodb driver
+
+            uses
+                schemas
+                    for data structure
+
+
+    base and work note
+        work
+        app.js
+            has
+                mongoose.connect('mongodb://127.0.0.1:27017/loc-Eight')
+
+
+        base
+        app.js
+            TODO
+                altas URL
+
+
+//Making people editable
+    create 'edit' form
+       new route created
+

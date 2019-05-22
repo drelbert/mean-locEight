@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-import { Person } from './people/people-list/person.model';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +8,5 @@ import { Person } from './people/people-list/person.model';
 })
 
 export class AppComponent {
-
 
 }
