@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'add', component: PeopleComponent },
   { path: 'edit/:personId', component: PeopleComponent },
   { path: 'projects', component: ProjectsListComponent },
+  { path: 'addProject', component: ProjectsListComponent },
   { path: 'editProject/:projectId', component: ProjectsAddComponent}
 ];
 

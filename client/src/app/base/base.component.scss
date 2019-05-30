@@ -14,11 +14,14 @@
   bottom: 15px;
 }
 
+.dashboard-card-header{
+  background: #1b1b1b;
+}
 
 .dashboard-card-content {
+  margin-top: 15px;
   text-align: left;
   color:  #eceff1;
-  border-bottom: solid 1px #ddd;
   padding-bottom: 24px;
 }
 
@@ -28,3 +31,4 @@
   top: 5px;
   right: 10px;
 }
+

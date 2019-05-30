@@ -1,14 +1,18 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-card-header>
     <mat-card-title>
       <p>Current Projects</p>
     </mat-card-title>
   </mat-card-header>
-<mat-accordion multi="true" *ngIf="projects.length > 0">
+<mat-accordion multi="true" *ngIf="projects.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let project of projects">
     <mat-expansion-panel-header>
       {{ project.title }}
     </mat-expansion-panel-header>
-       <p>{{ project.dateDue }}</p>
+      <div class="project-image">
+        <img [src]="project.imagePath" [alt]="project.title">
+      </div>
+       <p>{{ project.dueOn }}</p>
        <p>{{ project.lead }}</p>
     <mat-action-row>
       <a mat-button [routerLink]="['/editProject', project.id]">EDIT</a>
@@ -16,6 +20,12 @@
     </mat-action-row>
  </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="projects.length <= 0">No Projects Yet!</p>
+<mat-paginator
+  [length]="totalProjects"
+  [pageSize]="projectsPerPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangePage($event)">
+</mat-paginator>
+<p class="info-text mat-body-1" *ngIf="projects.length <= 0 && !isLoading">No Projects Yet!</p>
 
 <app-projects-add></app-projects-add>

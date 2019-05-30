@@ -5,28 +5,22 @@
       <p>Add A Person</p>
     </mat-card-title>
   </mat-card-header>
-  <form (submit)="onSavePerson(peopleForm)" #peopleForm="ngForm" *ngIf="!isLoading">
+  <form [formGroup]="form" (submit)="onSavePerson()" *ngIf="!isLoading">
       <mat-form-field>
           <input
           matInput
           type="text"
-          name="name"
-          [ngModel]="person?.name"
-          required
-          placeholder="Add First and Last Name"
-          #name="ngModel">
-         <mat-error *ngIf="name.invalid">Please Add Name</mat-error>
+          formControlName="name"
+          placeholder="Add First and Last Name">
+         <mat-error *ngIf="form.get('name').invalid">Please Add Name</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <textarea
+          <input
           matInput
           type="text"
-          name="role"
-          [ngModel]="person?.role"
-          required
-          placeholder="Add Role"
-          #role="ngModel"></textarea>
-         <mat-error *ngIf="role.invalid">Please Add a Role</mat-error>
+          formControlName="role"
+          placeholder="Add Role">
+         <mat-error *ngIf="form.get('role').invalid">Please Add a Role</mat-error>
         </mat-form-field>
         <button
         mat-raised-button

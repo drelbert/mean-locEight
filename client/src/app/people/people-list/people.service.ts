@@ -54,7 +54,7 @@ export class PeopleService {
         person.id = id;
         this.people.push(person);
         this.peopleUpdated.next([...this.people]);
-        this.router.navigate(['/people']);
+        this.router.navigate(['/add']);
       });
   }
 

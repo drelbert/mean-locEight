@@ -27,8 +27,9 @@ export class ProjectsService {
           return {
             title: project.title,
             lead: project.lead,
-            dateDue: project.dateDue,
-            id: project._id
+            dueOn: project.dueOn,
+            id: project._id,
+            imagePath: project.imagePath
           };
         });
       }))
@@ -43,31 +44,66 @@ export class ProjectsService {
   }
 
   getProject(id: string) {
-    return this.http.get<{ _id: string, title: string, lead: string, dateDue: Date }>('http://localhost:3000/api/projects/' + id);
+    return this.http.get<{ _id: string, title: string, lead: string, dueOn: string, imagePath: string }>(
+    'http://localhost:3000/api/projects/' + id);
   }
 
 
-  addProject(title: string, lead: string, dateDue: Date) {
-    const project: Project = { id: null, title: title, lead: lead, dateDue: dateDue };
+  addProject(title: string, lead: string, dueOn: string, image: File) {
+    const projectData = new FormData();
+    projectData.append('title', title);
+    projectData.append('lead', lead);
+    projectData.append('dueOn', dueOn);
+    projectData.append('image', image, title);
     this.http
-    .post<{ message: string, projectId: string }>('http://localhost:3000/api/projects', project)
+    .post<{ message: string, project: Project }>('http://localhost:3000/api/projects', projectData)
     .subscribe(responseData => {
-      const id = responseData.projectId;
-      project.id = id;
+      const project: Project = {
+        id: responseData.project.id,
+        title: title,
+        lead: lead,
+        dueOn: dueOn,
+        imagePath: responseData.project.imagePath
+      };
       this.projects.push(project);
       this.projectsUpdated.next([...this.projects]);
+      this.router.navigate(['/addProject']);
     });
   }
 
-  updateProject(id: string, title: string, lead: string, dateDue: Date) {
-    const project: Project = { id: id, title: title, lead: lead, dateDue: dateDue };
-    this.http.put('http://localhost:3000/api/projects/' + id, project )
+  updateProject(id: string, title: string, lead: string, dueOn: string, image: File | string) {
+   let projectData: Project | FormData;
+    if (typeof(image) === 'object') {
+      projectData = new FormData();
+      projectData.append('id', id);
+      projectData.append('title', title);
+      projectData.append('lead', lead);
+      projectData.append('dueOn', dueOn);
+      projectData.append('image', image, title);
+    } else {
+       projectData = {
+        id: id,
+        title: title,
+        lead: lead,
+        dueOn: dueOn,
+        imagePath: image
+      };
+    }
+    this.http.put('http://localhost:3000/api/projects/' + id, projectData )
       .subscribe(response => {
         const updatedProjects = [...this.projects];
-        const oldProjectIndex = updatedProjects.findIndex(p => p.id === project.id);
+        const oldProjectIndex = updatedProjects.findIndex(p => p.id === id);
+        const project: Project = {
+          id: id,
+          title: title,
+          lead: lead,
+          dueOn: dueOn,
+          imagePath: ''
+        };
         updatedProjects[oldProjectIndex] = project;
         this.projects = updatedProjects;
         this.projectsUpdated.next([...this.projects]);
+        this.router.navigate(['/projects']);
       });
   }
 
@@ -77,6 +113,7 @@ export class ProjectsService {
        const updatedProjects = this.projects.filter(project => project.id !== projectId);
        this.projects = updatedProjects;
        this.projectsUpdated.next([...this.projects]);
+
       });
   }
 }

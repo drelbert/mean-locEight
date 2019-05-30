@@ -1,15 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material';
-import { MatProgressSpinnerModule, MatMenuModule } from '@angular/material';
+import { MatProgressSpinnerModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatPaginatorModule
+        } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -24,6 +28,7 @@ import { ProjectsListComponent } from './projects/projects-list/projects-list.co
 import { ProjectsAddComponent } from './projects/projects-add/projects-add.component';
 import { BaseComponent } from './base/base.component';
 
+//Note about imports, must be done here and at the specific component.
 
 @NgModule({
   declarations: [
@@ -39,10 +44,11 @@ import { BaseComponent } from './base/base.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
     MatGridListModule,
+    MatListModule,
     MatIconModule,
     MatCardModule,
     MatButtonModule,
@@ -52,7 +58,8 @@ import { BaseComponent } from './base/base.component';
     MatMenuModule,
     HttpClientModule,
     RouterModule,
-    LayoutModule
+    LayoutModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatInputModule,
          MatCardModule,
          MatButtonModule,
-         MatExpansionModule
+         MatExpansionModule,
+         MatProgressSpinnerModule,
+         MatPaginatorModule
         } from '@angular/material';
 
 
@@ -19,12 +21,15 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
 
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
     MatButtonModule,
     MatExpansionModule,
-    RouterModule
+    RouterModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
+
   ]
 })
 export class ProjectsModule { }

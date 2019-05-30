@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { PeopleComponent } from './people.component';
@@ -27,10 +27,11 @@ import { PeopleListComponent } from './people-list/people-list.component';
     MatFormField,
     MatInputModule,
     BrowserAnimationsModule,
-    FormsModule,
+    ReactiveFormsModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class PeopleModule { }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { PeopleService } from '../people-list/people.service';
@@ -17,6 +17,7 @@ export class PeopleAddComponent implements OnInit {
       enteredName = '';
       enteredRole = '';
       person: Person;
+      form: FormGroup;
       isLoading = false;
       private mode = 'add';
       private personId: string;
@@ -25,6 +26,14 @@ export class PeopleAddComponent implements OnInit {
       constructor(public peopleService: PeopleService, public route: ActivatedRoute) {}
 
       ngOnInit() {
+        this.form = new FormGroup({
+          'name': new FormControl(null, {
+            validators: [Validators.required, Validators.minLength(3)]
+          }),
+          'role': new FormControl(null, {
+            validators: [Validators.required]
+          })
+        });
         this.route.paramMap.subscribe((paramMap: ParamMap) => {
           if (paramMap.has('personId')) {
             this.mode = 'edit';
@@ -32,7 +41,15 @@ export class PeopleAddComponent implements OnInit {
             this.isLoading = true;
             this.peopleService.getPerson(this.personId).subscribe(personData => {
               this.isLoading = false;
-              this.person = {id: personData._id, name: personData.name, role: personData.role};
+              this.person = {
+                id: personData._id,
+                name: personData.name,
+                role: personData.role
+              };
+            this.form.setValue({
+              'name': this.person.name,
+              'role': this.person.role
+             });
             });
           } else {
             this.mode = 'add';
@@ -42,15 +59,19 @@ export class PeopleAddComponent implements OnInit {
        }
 
 // Hey, this is a method
-      onSavePerson(form: NgForm) {
-        if (form.invalid) {
+      onSavePerson() {
+        if (this.form.invalid) {
           return;
       }
       if (this.mode === 'add') {
-        this.peopleService.addPeople(form.value.name, form.value.role);
+        this.peopleService.addPeople(this.form.value.name, this.form.value.role);
       } else {
-        this.peopleService.updatePerson(this.personId, form.value.name, form.value.role);
+        this.peopleService.updatePerson(
+          this.personId,
+          this.form.value.name,
+          this.form.value.role
+          );
       }
-        form.resetForm();
+      this.form.reset();
       }
 }
