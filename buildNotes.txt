@@ -98,38 +98,70 @@
                     
 //Adding NodeJS 
 
-    RESTful API 
+  //Connecting Node + Angular 
+    two servers 
+
+    Node(Express) 
+        handles incoming req's 
+
+    //Angular SPA 
+    handles background req's 
+
+        served from seprate static host 
+            returns the 
+                html
+                JavaScript 
+                CSS 
+
+    this means 
+        logically seperate apps 
+
+    with Node(Express)
+        build a RESTful API 
+
+
+    //RESTful API 
         a server side app or service 
 
         is
         stateless backend 
+            not caring who connects to it
+
+        the model 
+
+            server 
+                access from these three 
+            clientMobile
+
+            clientCode
+
+            clientBrowser (a SPA)
+
         
         does 
         exposes a few URLs or paths 
 
-            for instance 
-                RESTFul Server API
-                /users
-                /projects
-                /people 
+        the model 
+        
+            RESTful server 
+            /users
+            /projects
+            /people 
 
-                    has 
-                        get
-                        post 
-                        get
-                        delete 
+                req terms 
+                    get 
+                    post 
+                    delete
+            
+            Response 
 
-                     can 
-                        req (AJAX) from 
-                            the Angualar client 
-                        
-                        res from API 
-                            to use in client side 
+            to the 
+            Client 
+                with a Reequest (AJAX)
 
-                    JSON
-                        is how we communicate 
-                            from server to 
-                                client 
+
+            Using 
+            JSON data 
 
         this sets things up to allow for servicing multiple clients
             like
@@ -146,7 +178,7 @@
     Atlas 
         Project = LocEight
         
-        new cluster =
+        new cluster = people 
 
         admin 
             locEightAdmin
@@ -161,5 +193,73 @@
                 schemas 
                     for data structure 
 
-            
-        
+
+
+//Adding module and components 
+
+    ng g module name
+        in that module folder 
+
+            ng g c name
+
+
+starting server 
+        in terminal 
+           npm run start:server   
+                 
+Mdb Atlas
+mongo "mongodb+srv://cluster0-80zc4.mongodb.net/test" --username locEightAdmin
+gAp8MCPMfu7OBUs3
+
+
+//documenting the connetions between 
+    backend 
+        models 
+            has 
+                people schema 
+        routes 
+            has 
+                express.Router()
+                router
+                .post
+                .put
+                .get
+                .delete
+
+        app.js 
+            has 
+                app = express()
+                mongoose.connect  to Atlas url
+    
+    client
+        people 
+            has 
+            person.model 
+                with interface Person
+
+            people.service
+                 with 
+                    getPeople
+                    getPerson
+                    addPerson
+                    updatePerson
+                    deletePerson
+
+            people-list
+                has 
+                    component.ts 
+                        with 
+                            Subscription
+                            OnInit
+                            OnDestroy
+
+                            seems to manage part of observable to observer flow
+
+
+
+            people-add
+
+
+
+//Pick up point 
+    #29 Working on Form

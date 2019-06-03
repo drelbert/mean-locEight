@@ -28,11 +28,16 @@ export class PeopleListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.peopleService.getPeople();
-    this.peopleSub = this.peopleService.getPeopleUpdateListener()
+    this.peopleSub = this.peopleService.getPersonUpdateListener()
       .subscribe((people: Person[]) => {
         this.people = people;
       });
   }
+
+  onDelete(personId: string) {
+    this.peopleService.deletePerson(personId);
+  }
+
 
   ngOnDestroy() {
     this.peopleSub.unsubscribe();

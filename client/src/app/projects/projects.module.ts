@@ -9,26 +9,22 @@ import { FormsModule } from '@angular/forms';
 import { MatExpansionModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
-import { PeopleComponent } from './people.component';
-import { PeopleAddComponent } from './people-add/people-add.component';
-import { PeopleListComponent } from './people-list/people-list.component';
+import { ProjectsAddComponent } from './projects-add/projects-add.component';
+import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 @NgModule({
-  declarations: [
-    PeopleComponent,
-    PeopleAddComponent,
-    PeopleListComponent
-  ],
+  declarations: [ProjectsAddComponent, ProjectsListComponent],
   imports: [
-    BrowserModule,
     CommonModule,
+    BrowserModule,
+    FormsModule,
+    RouterModule,
+    MatExpansionModule,
     MatCardModule,
     MatFormField,
     MatInputModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    MatExpansionModule,
-    RouterModule
+    BrowserAnimationsModule
+
   ]
 })
-export class PeopleModule { }
+export class ProjectsModule { }

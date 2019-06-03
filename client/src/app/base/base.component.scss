@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+mat-grid-list {
+  width: 100%;
+}
+
+mat-grid-tile {
+  background: #444444;
+  row-gap: 2rem;
+}

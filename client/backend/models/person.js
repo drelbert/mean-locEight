@@ -10,5 +10,5 @@ const peopleSchema = mongoose.Schema({
 //Need to add the model after the schema
 //Turn the definition above into a model
 
-module.exports = mongoose.model('People', peopleSchema);
+module.exports = mongoose.model('Person', peopleSchema);
 
