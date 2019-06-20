@@ -14,7 +14,7 @@
       </div>
        <p>{{ project.dueOn }}</p>
        <p>{{ project.lead }}</p>
-    <mat-action-row>
+    <mat-action-row *ngIf="userIsAuthenticated">
       <a mat-button [routerLink]="['/editProject', project.id]">EDIT</a>
       <button mat-button (click)="onDelete(project.id)">DELETE</button>
     </mat-action-row>
@@ -24,8 +24,9 @@
   [length]="totalProjects"
   [pageSize]="projectsPerPage"
   [pageSizeOptions]="pageSizeOptions"
-  (page)="onChangePage($event)">
+  (page)="onChangePage($event)"
+  *ngIf="projects.length > 0">
 </mat-paginator>
 <p class="info-text mat-body-1" *ngIf="projects.length <= 0 && !isLoading">No Projects Yet!</p>
 
-<app-projects-add></app-projects-add>
+

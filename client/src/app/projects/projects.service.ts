@@ -13,17 +13,21 @@ export class ProjectsService {
   private projects: Project[] = [];
   // Observables is objects that pass data around, here Subject
   // Emitting with this line
-  private projectsUpdated = new Subject<Project[]>();
+  private projectsUpdated = new Subject<{projects: Project[], projectCount: number}>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
     // Note ref type when copied is only copy of address
     // So need to use the spread operator to copy the array
-  getProjects() {
+  getProjects(projectsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${projectsPerPage}&page=${currentPage}`;
     this.http
-    .get<{ message: string; projects: any }>('http://localhost:3000/api/projects')
-      .pipe(map((projectData) => {
-        return projectData.projects.map(project => {
+    .get<{ message: string; projects: any, maxProjects: number }>('http://localhost:3000/api/projects' + queryParams
+    )
+      .pipe(
+        map(projectData => {
+        return {
+          projects: projectData.projects.map(project => {
           return {
             title: project.title,
             lead: project.lead,
@@ -31,11 +35,17 @@ export class ProjectsService {
             id: project._id,
             imagePath: project.imagePath
           };
+        }),
+        maxProjects: projectData.maxProjects
+      };
+    })
+    )
+      .subscribe(transformedProjectData => {
+        this.projects = transformedProjectData.projects;
+        this.projectsUpdated.next({
+          projects: [...this.projects],
+          projectCount: transformedProjectData.maxProjects
         });
-      }))
-      .subscribe((transformedProjects) => {
-        this.projects = transformedProjects;
-        this.projectsUpdated.next([...this.projects]);
       });
   }
 
@@ -58,15 +68,6 @@ export class ProjectsService {
     this.http
     .post<{ message: string, project: Project }>('http://localhost:3000/api/projects', projectData)
     .subscribe(responseData => {
-      const project: Project = {
-        id: responseData.project.id,
-        title: title,
-        lead: lead,
-        dueOn: dueOn,
-        imagePath: responseData.project.imagePath
-      };
-      this.projects.push(project);
-      this.projectsUpdated.next([...this.projects]);
       this.router.navigate(['/addProject']);
     });
   }
@@ -91,30 +92,13 @@ export class ProjectsService {
     }
     this.http.put('http://localhost:3000/api/projects/' + id, projectData )
       .subscribe(response => {
-        const updatedProjects = [...this.projects];
-        const oldProjectIndex = updatedProjects.findIndex(p => p.id === id);
-        const project: Project = {
-          id: id,
-          title: title,
-          lead: lead,
-          dueOn: dueOn,
-          imagePath: ''
-        };
-        updatedProjects[oldProjectIndex] = project;
-        this.projects = updatedProjects;
-        this.projectsUpdated.next([...this.projects]);
         this.router.navigate(['/projects']);
       });
   }
 
   deleteProject(projectId: string) {
-    this.http.delete('http://localhost:3000/api/projects/' + projectId)
-      .subscribe(() => {
-       const updatedProjects = this.projects.filter(project => project.id !== projectId);
-       this.projects = updatedProjects;
-       this.projectsUpdated.next([...this.projects]);
-
-      });
+    return this.http
+    .delete('http://localhost:3000/api/projects/' + projectId);
   }
 }
 

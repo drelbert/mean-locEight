@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PeopleAddComponent } from './people/people-add/people-add.component';
-import { PeopleListComponent } from './people/people-list/people-list.component';
-import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
+
 import { PeopleComponent } from './people/people.component';
+import { ProjectsComponent } from './projects/projects.component';
 import { BaseComponent } from './base/base.component';
-import { ProjectsAddComponent } from './projects/projects-add/projects-add.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGuard } from './auth/auth.guard';
+
 
 const routes: Routes = [
   { path: '', component: BaseComponent },
   { path: 'people', component: PeopleComponent},
   { path: 'add', component: PeopleComponent },
   { path: 'edit/:personId', component: PeopleComponent },
-  { path: 'projects', component: ProjectsListComponent },
-  { path: 'addProject', component: ProjectsListComponent },
-  { path: 'editProject/:projectId', component: ProjectsAddComponent}
+  { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
+  { path: 'addProject', component: ProjectsComponent, canActivate: [AuthGuard] },
+  { path: 'editProject/:projectId', component: ProjectsComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent}
 ];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

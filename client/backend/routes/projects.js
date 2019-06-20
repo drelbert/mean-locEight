@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const Project = require('../models/projects');
+const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 
@@ -31,6 +32,7 @@ const storage = multer.diskStorage({
 
 router.post(
   "",
+  checkAuth,  //TODO, add to other routes below
   multer({storage: storage}).single("image"),
   (req, res, next) => {
   const url = req.protocol + '://' + req.get("host");
@@ -53,6 +55,7 @@ router.post(
 
 router.put(
   "/:id",
+  checkAuth,
   multer({storage: storage}).single("image"),
   (req, res, next) => {
     let imagePath = req.body.imagePath;
@@ -74,12 +77,27 @@ router.put(
 });
 
 router.get("", (req, res, next) => {
-  Project.find().then(documents => {
-   res.status(200).json({
-    message: "Projects returned",
-    projects: documents
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const postQuery = Project.find();
+  let fetchedProjects;
+  if (pageSize && currentPage) {
+    postQuery
+      .skip(pageSize * (currentPage -1))
+      .limit(pageSize);
+  }
+  postQuery
+  .then(documents => {
+    fetchedProjects = documents;
+    return Project.countDocuments();
+  })
+  .then(count => {
+    res.status(200).json({
+      message: "Projects fetched successfully",
+      projects: fetchedProjects,
+      maxProjects: count
+    });
   });
- });
 });
 
 router.get("/:id", (req, res, next) => {
@@ -92,7 +110,7 @@ router.get("/:id", (req, res, next) => {
   });
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", checkAuth, (req, res, next) => {
     Project.deleteOne({ _id: req.params.id }).then(result => {
     console.log(result);
     res.status(200).json({ message: 'Project Removed.' });

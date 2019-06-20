@@ -1,24 +1,56 @@
-<div class="grid-container">
-    <h1 class="mat-h1">Dashboard</h1>
-    <mat-grid-list cols="2" rowHeight="350px">
-      <mat-grid-tile *ngFor="let card of cards" [colspan]="card.cols" [rowspan]="card.rows">
-        <mat-card class="dashboard-card">
-          <mat-card-header class="dashboard-card-header">
-            <mat-card-title>
-              {{card.title}}
-              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu" xPosition="before">
-                <button mat-menu-item>EDIT</button>
-              </mat-menu>
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <mat-list-item>{{ card.content.name }}</mat-list-item>
-            <mat-list-item>{{ card.content.project }}</mat-list-item>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
+<h1 class="mat-h1">Dashboard</h1>
+<mat-grid-list cols="6" rowHeight="100px" gutterSize="2rem">
+    <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="4">
+      <mat-grid-tile-header>
+        Current People
+      </mat-grid-tile-header>
+        <mat-list *ngIf="people.length > 0" >
+          <mat-list-item *ngFor="let person of people">
+            {{ person.name }}
+          </mat-list-item>
+        </mat-list>
+        <p class="mat-body-1" *ngIf="people.length <= 0">Add People</p>
+        <mat-grid-tile-footer class="footer">
+          <mat-action-row>
+              <button mat-button>UPDATE</button>
+          </mat-action-row>
+        </mat-grid-tile-footer>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="2">
+      <mat-grid-tile-header>
+        Current Resources
+      </mat-grid-tile-header>
+          <mat-grid-list cols="1">
+            <ul>20m Pipe</ul>
+            <ul>4 5' Spruce</ul>
+          </mat-grid-list>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="2">
+    <mat-grid-tile-header>
+      Current Issues
+    </mat-grid-tile-header>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+     [colspan]="4"
+     [rowspan]="2">
+     <mat-grid-tile-header>
+      To Do List
+     </mat-grid-tile-header>
+      <mat-grid-list cols="3">
+        <li>Order Sod for 2290</li>
+        <li>Pay Tree Experts</li>
+        <li>Create bid for 3400</li>
+      </mat-grid-list>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <app-people-list> </app-people-list>

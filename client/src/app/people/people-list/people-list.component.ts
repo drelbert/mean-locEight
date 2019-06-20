@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { PageEvent } from '@angular/material';
 import { Subscription } from 'rxjs';
-
 
 import { Person } from './person.model';
 import { PeopleService } from './people.service';
+
 
 
 @Component({
@@ -24,6 +25,10 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   */
   people: Person[] = [];
   isLoading = false;
+  totalPeople = 0;
+  peoplePerPage = 2;
+  currentPage = 1;
+  pageSizeOptions = [1, 2, 4, 10];
   private peopleSub: Subscription;
 
   // Adding a constructor for dependency injection
@@ -33,16 +38,29 @@ export class PeopleListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.peopleService.getPeople();
-    this.peopleSub = this.peopleService.getPeopleUpdateListener()
-      .subscribe((people: Person[]) => {
+    this.peopleService.getPeople(this.peoplePerPage, this.currentPage);
+    this.peopleSub = this.peopleService
+    .getPeopleUpdateListener()
+    .subscribe((personData: {people: Person[], peopleCount:  number}) => {
         this.isLoading = false;
-        this.people = people;
+        this.totalPeople = personData.peopleCount;
+        this.people = personData.people;
       });
   }
 
+  onChangedPage(pageData: PageEvent) {
+    this.isLoading = true;
+    this.currentPage = pageData.pageIndex + 1;
+    this.peoplePerPage = pageData.pageSize;
+    this.peopleService.getPeople(this.peoplePerPage, this.currentPage);
+  }
+
+
   onDelete(personId: string) {
-      this.peopleService.deletePerson(personId);
+      this.isLoading = true;
+      this.peopleService.deletePerson(personId).subscribe(() => {
+        this.peopleService.getPeople(this.peoplePerPage, this.currentPage);
+      });
   }
 
   ngOnDestroy() {

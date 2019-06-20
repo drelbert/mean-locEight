@@ -2,33 +2,15 @@
   display: block;
 }
 
-.grid-container {
-  margin: 20px;
+mat-grid-list {
+  width: 100%;
+  margin: 0 auto;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
+mat-grid-tile {
+  background: #444444;
+  row-gap: 2rem;
 }
-
-.dashboard-card-header{
-  background: #1b1b1b;
+app-people-list {
+  width: 30%;
 }
-
-.dashboard-card-content {
-  margin-top: 15px;
-  text-align: left;
-  color:  #eceff1;
-  padding-bottom: 24px;
-}
-
-
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
-

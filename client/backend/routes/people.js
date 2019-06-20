@@ -33,13 +33,29 @@ router.put("/:id", (req, res, next) => {
 
 
 router.get("", (req, res, next) => {
-   People.find().then(documents => {
-    res.status(200).json({
-      message: 'People fetched successfully',
-      people: documents
-   });
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+  const peopleQuery = People.find();
+  let fetchedPeople;
+  if (pageSize && currentPage) {
+    peopleQuery
+      .skip(pageSize * (currentPage -1))
+      .limit(pageSize);
+  }
+   peopleQuery
+   .then(documents => {
+     fetchedPeople = documents;
+    return People.count();
+   })
+    .then(count => {
+      res.status(200).json({
+        message: 'People fetched successfully',
+        people: fetchedPeople,
+        maxPeople: count
+    });
   });
 });
+
 
 router.get("/:id", (req, res, next) => {
   People.findById(req.params.id).then(person => {

@@ -1,42 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-
-
-export interface Card {
-  cols: number;
-  rows: number;
-  title: string;
-  content: {
-    name: string;
-    project: string;
-};
-
+import { PeopleService } from '../people/people-list/people.service';
+import { Person } from '../people/people-list/person.model';
 
 @Component({
   selector: 'app-base',
   templateUrl: './base.component.html',
   styleUrls: ['./base.component.scss']
 })
-export class BaseComponent {
+export class BaseComponent implements OnInit, OnDestroy {
+  /* Usig structural directives here.
+  people = [
+    {name: 'Vader', project: 'Sod Install 2029'},
+    {name: 'Lupe', project: 'Spruce Install 229'},
+    {name: 'Hans', project: 'Jacuzzi drop 273'}
+  ];
+  */
 
-  cards: Card[] = [
-          {
-            title: 'People',
-            content:
-            {
-              name: ['Lars', 'Mack', 'Tito'],
-              project: 'Sod Install 2912',
-            },
-            cols: 2,
-            rows: 1 },
+// This is the list of properties.
+people: Person[] = [];
+peoplePerPage = 2;
+totalPeople = 0;
+private peopleSub: Subscription;
 
+// Using the dependency injection system.
+constructor(public peopleService: PeopleService) {}
 
+  ngOnInit() {
+    this.peopleService.getPeople(this.peoplePerPage, this.totalPeople);
+    this.peopleSub = this.peopleService
+    .getPeopleUpdateListener()
+      .subscribe((personData: {people: Person[], peopleCount: number}) => {
+        this.people = personData.people;
+        this.totalPeople = personData.peopleCount;
+      });
+  }
 
-          { title: 'Projects', content: 'TODO', cols: 1, rows: 1 },
-          { title: 'Resources', content: 'TODO', cols: 1, rows: 2 },
-        ];
-      }
-
+  ngOnDestroy() {
+    this.peopleSub.unsubscribe();
+  }
+}
 

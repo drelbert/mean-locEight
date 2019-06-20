@@ -11,11 +11,13 @@ import { MatInputModule,
         } from '@angular/material';
 
 
+import { ProjectsComponent } from './projects.component';
 import { ProjectsAddComponent } from './projects-add/projects-add.component';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 @NgModule({
   declarations: [
+    ProjectsComponent,
     ProjectsAddComponent,
     ProjectsListComponent],
 

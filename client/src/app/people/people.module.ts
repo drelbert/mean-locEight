@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatPaginatorModule } from '@angular/material';
 import { MatFormField } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material';
@@ -30,8 +30,10 @@ import { PeopleListComponent } from './people-list/people-list.component';
     ReactiveFormsModule,
     MatExpansionModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ]
 })
 export class PeopleModule { }
