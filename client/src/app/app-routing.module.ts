@@ -12,9 +12,9 @@ import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: BaseComponent },
-  { path: 'people', component: PeopleComponent},
-  { path: 'add', component: PeopleComponent },
-  { path: 'edit/:personId', component: PeopleComponent },
+  { path: 'people', component: PeopleComponent, canActivate: [AuthGuard] },
+  { path: 'add', component: PeopleComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:personId', component: PeopleComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'addProject', component: ProjectsComponent, canActivate: [AuthGuard] },
   { path: 'editProject/:projectId', component: ProjectsComponent, canActivate: [AuthGuard] },

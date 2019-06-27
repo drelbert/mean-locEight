@@ -13,9 +13,9 @@ import { mimeType } from './mime-type.validator';
 })
 export class ProjectsAddComponent implements OnInit {
   // Property set
-  enteredTitle = "";
-  enteredLead = "";
-  enteredDueOn = "";
+  enteredTitle = '';
+  enteredLead = '';
+  enteredDueOn = '';
   project: Project;
   isLoading = false;
   form: FormGroup;

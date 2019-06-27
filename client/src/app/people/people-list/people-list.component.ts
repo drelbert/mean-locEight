@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Person } from './person.model';
 import { PeopleService } from './people.service';
+import { AuthService } from '../../auth/auth.service';
 
 
 
@@ -29,12 +30,14 @@ export class PeopleListComponent implements OnInit, OnDestroy {
   peoplePerPage = 2;
   currentPage = 1;
   pageSizeOptions = [1, 2, 4, 10];
+  userIsAuthenticated = false;
   private peopleSub: Subscription;
+  private authStatusSub: Subscription;
 
   // Adding a constructor for dependency injection
   // Add an argument = peopleService and the type PeopleService
   // Use public keyword to create a new property
-  constructor(public peopleService: PeopleService) {}
+  constructor(public peopleService: PeopleService, private authService: AuthService) {}
 
   ngOnInit() {
     this.isLoading = true;
@@ -46,6 +49,12 @@ export class PeopleListComponent implements OnInit, OnDestroy {
         this.totalPeople = personData.peopleCount;
         this.people = personData.people;
       });
+    this.userIsAuthenticated = this.authService.getIsAuth();
+    this.authStatusSub = this.authService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated => {
+      this.userIsAuthenticated = isAuthenticated;
+    });
   }
 
   onChangedPage(pageData: PageEvent) {
@@ -65,6 +74,7 @@ export class PeopleListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.peopleSub.unsubscribe();
+    this.authStatusSub.unsubscribe();
   }
 
 }

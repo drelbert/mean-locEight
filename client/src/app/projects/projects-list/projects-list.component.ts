@@ -63,6 +63,8 @@ ngOnInit() {
   this.isLoading = true;
   this.projectsService.deleteProject(projectId).subscribe(() => {
     this.projectsService.getProjects(this.projectsPerPage, this.currentPage);
+  }, () => {
+    this.isLoading = false;
   });
  }
 

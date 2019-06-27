@@ -10,7 +10,7 @@
       {{ person.name }}
     </mat-expansion-panel-header>
     <p>{{ person.role }}</p>
-     <mat-action-row>
+     <mat-action-row  *ngIf="userIsAuthenticated">
         <a mat-button  [routerLink]="['/edit', person.id]">EDIT</a>
       <button mat-button (click)="onDelete(person.id)">REMOVE</button>
     </mat-action-row>

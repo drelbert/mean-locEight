@@ -51,7 +51,8 @@ router.post(
       }
    });
   });
-});
+ }
+);
 
 router.put(
   "/:id",
@@ -70,8 +71,11 @@ router.put(
     dueOn: req.body.dueOn,
     imagePath: imagePath
   });
-  console.log(project);
-  Project.updateOne({ _id: req.params.id }, project).then(result => {
+  Project
+  .updateOne(
+    { _id: req.params.id },
+    project
+    ).then(result => {
     res.status(200).json({ message: "Update Success!" });
   });
 });

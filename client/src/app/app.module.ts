@@ -12,7 +12,8 @@ import { MatExpansionModule } from '@angular/material';
 import { MatProgressSpinnerModule,
         MatMenuModule,
         MatToolbarModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatDialogModule
         } from '@angular/material';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -27,10 +28,12 @@ import { PeopleListComponent } from './people/people-list/people-list.component'
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { ProjectsAddComponent } from './projects/projects-add/projects-add.component';
+import { ErrorComponent } from './error/error.component';
 import { BaseComponent } from './base/base.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
 
 
 // Note about imports, must be done here and at the specific component.
@@ -47,7 +50,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     ProjectsListComponent,
     BaseComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -68,12 +72,15 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     HttpClientModule,
     RouterModule,
     LayoutModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }
 

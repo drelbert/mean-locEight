@@ -8,6 +8,6 @@ module.exports = (req, res, next) => {
     jwt.verify(token, "secret_placeholder_TODO_make_longer");
     next();
   } catch (error) {
-    res.status(401).json({message: 'Auth Failed'});
+    res.status(401).json({message: 'Oops, unfortuneatly you are not authenticated.'});
   }
 };
