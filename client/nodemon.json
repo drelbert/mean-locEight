@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW" : "TODO",
+    "JWT_KEY" : "secret_placeholder_TODO_make_longer"
+  }
+}

@@ -4,9 +4,10 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import { environment } from '../../../environments/environment';
 import { Person } from './person.model';
 
-
+const BACKEND_URL =  environment.apiUrl + '/people/';
 
 @Injectable({providedIn: 'root'})
 export class PeopleService {
@@ -19,7 +20,7 @@ export class PeopleService {
   getPeople(peoplePerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${peoplePerPage}&page=${currentPage}`;
     this.http
-      .get<{ message: string; people: any; maxPeople: number }>('http://localhost:3000/api/people' + queryParams)
+      .get<{ message: string; people: any; maxPeople: number }>( BACKEND_URL + queryParams)
       .pipe(
         map(peopleData => {
         return {
@@ -50,14 +51,14 @@ export class PeopleService {
 
 
   getPerson(id: string) {
-    return this.http.get<{ _id: string; name: string; role: string }>('http://localhost:3000/api/people/' + id);
+  return this.http.get<{ _id: string; name: string; role: string }>(BACKEND_URL + id);
   }
 
 
   addPeople(name: string, role: string) {
     const person: Person = { id: null, name: name, role: role };
     this.http
-      .post<{ message: string, personId: string }>('http://localhost:3000/api/people', person)
+    .post<{ message: string, personId: string }>(BACKEND_URL, person)
       .subscribe(responseData => {
         this.router.navigate(['/add']);
       });
@@ -66,7 +67,7 @@ export class PeopleService {
   updatePerson(id: string, name: string, role: string) {
     const person: Person = { id: id, name: name, role: role };
     this.http
-      .put('http://localhost:3000/api/people/' + id, person)
+      .put(BACKEND_URL + id, person)
       .subscribe(response => {
         this.router.navigate(['/people']);
   });
@@ -74,7 +75,7 @@ export class PeopleService {
 
   deletePerson(personId: string) {
     return this.http
-    .delete('http://localhost:3000/api/people/' + personId);
+    .delete(BACKEND_URL + personId);
 
   }
 }

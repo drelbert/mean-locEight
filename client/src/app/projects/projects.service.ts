@@ -4,9 +4,10 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
 import { Project } from './project.model';
 
-
+const BACKEND_URL = environment.apiUrl + '/projects/';
 
 @Injectable({providedIn: 'root'})
 export class ProjectsService {
@@ -22,7 +23,7 @@ export class ProjectsService {
   getProjects(projectsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${projectsPerPage}&page=${currentPage}`;
     this.http
-    .get<{ message: string; projects: any, maxProjects: number }>('http://localhost:3000/api/projects' + queryParams
+    .get<{ message: string; projects: any, maxProjects: number }>(BACKEND_URL + queryParams
     )
       .pipe(
         map(projectData => {
@@ -55,7 +56,7 @@ export class ProjectsService {
 
   getProject(id: string) {
     return this.http.get<{ _id: string, title: string, lead: string, dueOn: string, imagePath: string }>(
-    'http://localhost:3000/api/projects/' + id);
+    BACKEND_URL + id);
   }
 
 
@@ -66,7 +67,7 @@ export class ProjectsService {
     projectData.append('dueOn', dueOn);
     projectData.append('image', image, title);
     this.http
-    .post<{ message: string, project: Project }>('http://localhost:3000/api/projects', projectData)
+    .post<{ message: string, project: Project }>(BACKEND_URL, projectData)
     .subscribe(responseData => {
       this.router.navigate(['/addProject']);
     });
@@ -90,7 +91,7 @@ export class ProjectsService {
         imagePath: image
       };
     }
-    this.http.put('http://localhost:3000/api/projects/' + id, projectData )
+    this.http.put(BACKEND_URL + id, projectData )
       .subscribe(response => {
         this.router.navigate(['/projects']);
       });
@@ -98,7 +99,7 @@ export class ProjectsService {
 
   deleteProject(projectId: string) {
     return this.http
-    .delete('http://localhost:3000/api/projects/' + projectId);
+    .delete(BACKEND_URL + projectId);
   }
 }
 
