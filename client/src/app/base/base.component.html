@@ -1,25 +1,27 @@
 <h1 class="mat-h1">Dashboard</h1>
 <mat-grid-list cols="6" rowHeight="100px" gutterSize="2rem">
-    <mat-grid-tile
+
+  <mat-grid-tile
       [colspan]="2"
       [rowspan]="4">
-      <mat-grid-tile-header>
-        Current People
-      </mat-grid-tile-header>
-        <mat-list *ngIf="people.length > 0" >
-          <mat-list-item *ngFor="let person of people">
-            {{ person.name }}
-          </mat-list-item>
-        </mat-list>
-        <p class="mat-body-1" *ngIf="people.length <= 0">Add People</p>
-        <mat-grid-tile-footer class="footer">
-          <mat-action-row>
-              <button mat-button>UPDATE</button>
-          </mat-action-row>
-        </mat-grid-tile-footer>
-    </mat-grid-tile>
+          <mat-grid-tile-header>
+              Current People
+            </mat-grid-tile-header>
 
-    <mat-grid-tile
+              <mat-list *ngIf="people.length > 0" >
+                <mat-list-item *ngFor="let person of people">
+                  {{ person.name }}
+                </mat-list-item>
+              </mat-list>
+
+            <mat-grid-tile-footer>
+                <button mat-button>UPDATE</button>
+            </mat-grid-tile-footer>
+  </mat-grid-tile>
+
+
+
+  <mat-grid-tile
       [colspan]="2"
       [rowspan]="2">
       <mat-grid-tile-header>
@@ -29,7 +31,7 @@
             <ul>20m Pipe</ul>
             <ul>4 5' Spruce</ul>
           </mat-grid-list>
-    </mat-grid-tile>
+  </mat-grid-tile>
 
     <mat-grid-tile
     [colspan]="2"
@@ -53,4 +55,5 @@
     </mat-grid-tile>
   </mat-grid-list>
 
-  <app-people-list> </app-people-list>
+
+

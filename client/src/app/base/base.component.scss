@@ -1,16 +1,21 @@
 :host {
   display: block;
-}
-
-mat-grid-list {
-  width: 100%;
-  margin: 0 auto;
+  flex-wrap: wrap;
 }
 
 mat-grid-tile {
-  background: #444444;
+  background: #414141;
   row-gap: 2rem;
+
+  mat-grid-tile-header{
+    background: #BB86FC;
+  }
+  mat-grid-list {
+    width: 100%;
+    margin: 0 auto;
+  }
+  mat-grid-tile-footer {
+    background: #3700B3;
+  }
 }
-app-people-list {
-  width: 30%;
-}
+

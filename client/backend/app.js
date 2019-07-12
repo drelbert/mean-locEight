@@ -10,8 +10,10 @@ const userRoutes = require("./routes/user");
 
 const app = express();
 
-//TODO for the Altas connection, first add it here then cut the password, place it in the nodemon json file and insert this ' " + process.env.MONGO_ATLAS_PW + " '
-//
+//TODO for the Altas connection, first add it here then cut the password, place it in the nodemon json file and insert this ' " + process.env.MONGO_ATLAS_PW + " ' below
+
+//'mongodb+srv://locEightAdmin:<password>@cluster0-80zc4.mongodb.net/test?retryWrites=true&w=majority'
+
 mongoose.connect('mongodb://127.0.0.1:27017/loc-Eight', {useNewUrlParser: true })
   .then(() => {
     console.log('Connected to database.');
