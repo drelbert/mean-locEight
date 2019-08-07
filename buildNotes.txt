@@ -162,9 +162,29 @@
                     for data structure 
 
             
-        
-flex work 
+
+//Angular deploy 
+    use 
+    ng buid --prod    
+
+
+
+//flex work 
 https://brianflove.com/2017/05/03/responsive-angular/
 
 or use the manning ch 7 
 
+//Re-Deploy issue 
+modification to  
+    backend 
+        added 
+            file.js  
+                muelter code 
+        
+        updated routes/projects.js
+                cut muelter code 
+
+
+result 
+    after compressing and redeploying 
+        CORS error

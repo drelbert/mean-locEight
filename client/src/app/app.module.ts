@@ -9,9 +9,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { PeopleComponent } from './people/people.component';
-import { PeopleAddComponent } from './people/people-add/people-add.component';
-import { PeopleListComponent } from './people/people-list/people-list.component';
 import { ErrorComponent } from './error/error.component';
 import { BaseComponent } from './base/base.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -20,6 +17,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { ErrorInterceptor } from './error-interceptor';
 import { AngularMaterialModule } from './angular-material.module';
 import { ProjectsModule } from './projects/projects.module';
+import { PeopleModule } from './people/people.module';
 
 
 // Note about imports, must be done here and at the specific component.
@@ -28,9 +26,6 @@ import { ProjectsModule } from './projects/projects.module';
   declarations: [
     AppComponent,
     HeaderComponent,
-    PeopleComponent,
-    PeopleAddComponent,
-    PeopleListComponent,
     BaseComponent,
     LoginComponent,
     SignupComponent,
@@ -46,7 +41,8 @@ import { ProjectsModule } from './projects/projects.module';
     RouterModule,
     LayoutModule,
     AngularMaterialModule,
-    ProjectsModule
+    ProjectsModule,
+    PeopleModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
