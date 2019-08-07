@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  flex-wrap: wrap;
+}
+
+mat-grid-tile {
+  background: #414141;
+  row-gap: 2rem;
+
+  mat-grid-tile-header{
+    background: #BB86FC;
+  }
+  mat-grid-list {
+    width: 100%;
+    margin: 0 auto;
+  }
+  mat-grid-tile-footer {
+    background: #c7a2f5;
+  }
+  .resources {
+    background: #9c9b9e
+  }
+}
+

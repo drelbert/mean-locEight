@@ -1,0 +1,72 @@
+<h1 class="mat-h1">Dashboard</h1>
+<mat-grid-list cols="6" rowHeight="100px" gutterSize="2rem">
+
+  <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="4">
+          <mat-grid-tile-header>
+              Current People
+            </mat-grid-tile-header>
+
+              <mat-list *ngIf="people.length > 0" >
+                <mat-list-item *ngFor="let person of people">
+                  {{ person.name }}
+                </mat-list-item>
+              </mat-list>
+
+            <mat-grid-tile-footer>
+                <button mat-button>UPDATE</button>
+            </mat-grid-tile-footer>
+  </mat-grid-tile>
+
+
+
+  <mat-grid-tile
+      [colspan]="2"
+      [rowspan]="2">
+      <mat-grid-tile-header>
+        Current Resources
+      </mat-grid-tile-header>
+          <mat-grid-list cols="1">
+            <ul>20m Pipe</ul>
+            <ul>4 5' Spruce</ul>
+          </mat-grid-list>
+      <mat-grid-tile-footer class="resources">
+          <button mat-button>UPDATE</button>
+      </mat-grid-tile-footer>
+  </mat-grid-tile>
+
+    <mat-grid-tile
+    [colspan]="2"
+    [rowspan]="2">
+      <mat-grid-tile-header>
+      Current Issues
+      </mat-grid-tile-header>
+      <mat-grid-list cols="1">
+        <ul>Permits</ul>
+        <ul>Product Delivery</ul>
+      </mat-grid-list>
+      <mat-grid-tile-footer>
+        <button mat-button>UPDATE</button>
+    </mat-grid-tile-footer>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+     [colspan]="4"
+     [rowspan]="2">
+     <mat-grid-tile-header>
+      To Do List
+     </mat-grid-tile-header>
+      <mat-grid-list cols="3">
+        <li>Order Sod for 2290</li>
+        <li>Pay Tree Experts</li>
+        <li>Create bid for 3400</li>
+      </mat-grid-list>
+      <mat-grid-tile-footer>
+        <button mat-button>UPDATE</button>
+    </mat-grid-tile-footer>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+
+

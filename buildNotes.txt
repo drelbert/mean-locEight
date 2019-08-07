@@ -162,9 +162,28 @@
                     for data structure 
 
             
-        
-flex work 
+
+//Angular deploy 
+    use 
+    ng buid --prod    
+
+
+
+//flex work 
 https://brianflove.com/2017/05/03/responsive-angular/
 
 or use the manning ch 7 
 
+
+
+//Integrated version 
+
+    use of 
+        ng build --prod 
+
+        to add the angular app to the backend 
+
+
+        note:
+            modified the file structure to eliminate 
+                "client" folder 

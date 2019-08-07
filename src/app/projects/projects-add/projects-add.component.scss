@@ -1,0 +1,53 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-card{
+  background-color: #607d8b;
+}
+
+mat-card-header{
+  background-color: #34515e;
+}
+
+mat-card-title{
+  color: #eceff1;
+}
+
+button{
+  background-color: #616161;
+  color: #F5F5F5;
+}
+
+.preSaveAction{
+  background-color: #757575;
+  color: #F5F5F5;
+}
+
+mat-form-field,
+textarea {
+  width: 97%;
+  margin: .4rem;
+}
+
+mat-error{
+  color: whitesmoke;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
