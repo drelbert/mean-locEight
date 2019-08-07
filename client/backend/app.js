@@ -26,28 +26,10 @@ app.use((req, res, next) => {
   next();
 })
 
+//The use function for people.
 app.use("/api/people", peopleRoutes);
 
-app.use("/api/projects", (req, res, next) => {
-  const projects = [
-    {
-    id: "ghgh58eajfg",
-    title: "Do This",
-    lead: "Tor",
-    dateDue: "August"
-    },
-    {
-      id: "htehjetyekh",
-      title: "And This",
-      lead: "Magnus",
-      dateDue: "November"
-      }
-  ];
-  res.status(200).json[{
-    message: 'Projects in db',
-    projects: projects
-  }];
-});
+
 
 module.exports = app;
 

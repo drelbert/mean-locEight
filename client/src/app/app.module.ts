@@ -18,8 +18,6 @@ import { HeaderComponent } from './header/header.component';
 import { PeopleComponent } from './people/people.component';
 import { PeopleAddComponent } from './people/people-add/people-add.component';
 import { PeopleListComponent } from './people/people-list/people-list.component';
-import { ProjectsAddComponent } from './projects/projects-add/projects-add.component';
-import { ProjectsListComponent } from './projects/projects-list/projects-list.component';
 import { BaseComponent } from './base/base.component';
 
 
@@ -30,8 +28,6 @@ import { BaseComponent } from './base/base.component';
     PeopleComponent,
     PeopleAddComponent,
     PeopleListComponent,
-    ProjectsAddComponent,
-    ProjectsListComponent,
     BaseComponent
   ],
   imports: [
